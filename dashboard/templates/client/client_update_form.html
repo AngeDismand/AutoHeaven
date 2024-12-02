@@ -1,0 +1,38 @@
+
+<form hx-post="{{ request.path }}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Modifier les informations du propriétaire</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row pt-4">
+      <div class="col-md-6">
+        <label for="" class="">Nom</label>
+             {{ form.nom }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Prénom</label>
+             {{ form.prenom }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Sexe</label>
+             {{ form.sexe }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Numéro de téléphone</label>
+             {{ form.numero_de_telephone }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Addresse</label>
+             {{ form.addresse }}
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      Annuler
+    </button>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </div>
+</form>
+

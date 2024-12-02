@@ -1,0 +1,36 @@
+{% include '../header.html' %}
+          <!--  Header End -->
+          <main  id="home">
+            <article>
+              <section class="section hero">
+                <div class="container">
+                  <div class="hero-content">
+                    <h2 class="h4 hero-title">Bienvenue {{user.username}} sur votre page de réservation 🤩!</h2>
+                  </div>
+                  <div class="reservation-banner"></div>
+                </div>
+              </section>
+              <section class="section featured-car" id="featured-car">
+                <div class="container">
+                  <div class="title-wrapper">
+                    <h2 class="h2 section-title">Mes réservations <i class="ri-verified-badge-line"  style="color:green;font-size:35px"></i></h2>
+                  </div>
+                  <div   hx-trigger="load, movieListChanged from:body" hx-get="{% url 'reservation_list' %}" hx-target="this">
+                  </div>
+                </div>
+              </section>
+              <section class="section featured-car" id="featured-car">
+                <div class="container">
+                  <div class="title-wrapper">
+                    <h2 class="h2 section-title">Voiture disponible pour vous</h2>
+                  </div>
+                  <div  hx-trigger="load, movieListChanged from:body" hx-get="{% url 'vehicule_disponible' %}" >
+                  </div>
+                  <div id="modal" class="modal fade">
+                    <div id="dialog" class="modal-dialog modal-lg" hx-target="this"></div>
+                  </div>
+                </div>
+              </section>
+            </article>
+          </main>
+  {% include '../footer.html' %}

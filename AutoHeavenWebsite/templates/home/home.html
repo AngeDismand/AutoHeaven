@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block section %}
+
+  
+<main  id="home">
+    <article>
+
+      <!-- 
+        - #HERO
+      -->
+
+      <section class="section hero">
+        <div class="container">
+
+          <div class="hero-content">
+            <h2 class="h4 hero-title">AutoHeaven, votre agence de location de voiture intuitive, transparente et fiable </h2>
+
+            <p class="hero-text">
+              une voiture tout à vous, en une fraction de seconde ⚡
+            </p>
+          </div>
+
+          <div class="hero-banner"></div>
+
+          <form action="" class="hero-form">
+
+            <div class="input-wrapper">
+              <label for="input-1" class="input-label">Voiture, model, or marque</label>
+
+              <input type="text" name="car-model" id="input-1" class="input-field"
+                placeholder="Que recherchez-vous?">
+            </div>
+
+            <div class="input-wrapper">
+              <label for="input-2" class="input-label">Tarift</label>
+
+              <input type="text" name="monthly-pay" id="input-2" class="input-field" placeholder="£">
+            </div>
+
+            <button type="submit" class="btn-reservation">Search</button>
+
+          </form>
+
+        </div>
+      </section>
+
+
+
+
+
+      <!-- 
+        - #FEATURED CAR
+      -->
+
+      <section class="section featured-car" id="featured-car">
+        <div class="container">
+
+          <div class="title-wrapper">
+            <h2 class="h2 section-title">Voitures</h2>
+
+          </div>
+
+          <ul class="featured-car-list">
+
+            <li>
+              <div class="featured-car-card">
+
+                <figure class="card-banner">
+                  <img src="{% static "img/car-1.jpg" %}" alt="Toyota RAV4 2021" loading="lazy" width="440" height="300"
+                    class="w-100">
+                </figure>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="featured-car-card">
+
+                <figure class="card-banner">
+                  <img src="{% static "img/car-2.jpg" %}" alt="BMW 3 Series 2019" loading="lazy" width="440" height="300"
+                    class="w-100">
+                </figure>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="featured-car-card">
+
+                <figure class="card-banner">
+                  <img src="{% static "img/car-3.jpg" %}" alt="Volkswagen T-Cross 2020" loading="lazy" width="440"
+                    height="300" class="w-100">
+                </figure>
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
+    {% comment %}     {% if vehicule_infos|length > 0 %}
+
+      <section class="section featured-car" id="featured-car">
+        <div class="container">
+
+          <div class="title-wrapper">
+            <h2 class="h2 section-title">Nos voitures</h2>
+
+          </div>
+
+          <ul class="featured-car-list">
+            {% for vehicule_info in vehicule_infos%}
+            <li>
+              <div class="featured-car-card">
+
+                <figure class="card-banner">
+                  {% if vehicule_info.vehicule.image %}
+                  <img src=" {{ MEDIA_URL }}../media/{{vehicule_info.vehicule.image }} " alt="Image" loading="lazy" width="440" height="300"
+                  class="w-100">
+                  {% else %}
+                  <img src=" {{ MEDIA_URL }}../media/vehicule_image/default_car_img.webp " alt="Image" loading="lazy" width="440" height="300"
+                  class="w-100">
+                  {% endif %}
+                   
+                </figure>
+
+                <div class="card-content">
+
+                  <div class="card-title-wrapper">
+                    <h3 class="h3 card-title">
+                      <a href="#">{{vehicule_info.vehicule.marque}}</a>
+                    </h3>
+
+                    <data class="year" value="">{{vehicule_info.vehicule.model}}</data>
+                  </div>
+
+                  <ul class="card-list">
+
+                    <li class="card-list-item">
+                      <i class="ri-signal-tower-fill"></i>
+
+                      <span class="card-item-text">Statut</span>
+                    </li>
+
+                    <li class="card-list-item">
+                      {% if vehicule_info.vehicule.statut == 'Disponible' %}
+                      <i class="ri-verified-badge-line"></i>
+                      {% elif vehicule_info.vehicule.statut == 'Occupé' %}
+                      <i class="ri-close-line"></i>
+                      {% elif vehicule_info.vehicule.statut == 'En attente' %}
+                      <i class="ri-loader-line"></i>
+                      {% endif %}
+                      <span class="card-item-text">{{ vehicule_info.vehicule.statut }}</span>
+                    </li>
+
+                  </ul>
+
+                  <div class="card-price-wrapper">
+
+                    <p class="card-price">
+                      <strong>{{ vehicule_info.tarif.prix }} £</strong> / {{ vehicule_info.tarif.periodicite }}
+                    </p>
+                    {% if vehicule_info.vehicule.statut != 'Occupé'%}
+                    <button hx-get="{% url 'add_reservation' pk=vehicule_info.vehicule.pk %}"  hx-target="#dialog" class="btn-reservation">Réserver maintenant</button>
+                    <div id="modal" class="modal fade">
+                      <div id="dialog" class="modal-dialog modal-lg" hx-target="this"></div>
+                    </div>
+                  </div>
+                    
+                  {% endif %}
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+
+          
+
+           
+
+        
+{% endfor%}
+          </ul>
+
+        </div>
+      </section>
+        {% endif %}
+ {% endcomment %}
+
+      <!-- 
+        - #GET START
+      -->
+
+      <section class="section get-start" id="Apropos">
+        <div class="container">
+
+          <h2 class="h2 section-title" >A propos de nous</h2>
+          <p align="center" style="font-size:20px">AutoHeaven est une agence réputée spécialisée dans la location de voiture. Vous avez besoin d'une voiture hyper puissante
+            et trés économqiue ou  d'une voiture pour un
+            voyage d'affaires ou des vacances en famille, nous avons ce qu'il vous
+            faut, AutoHeaven est votre meilleure solution!
+          </p>
+          <h2 class="h2 section-title" >Nos termes</h2>
+          <ul class="get-start-list">
+
+            <li>
+              <div class="get-start-card">
+
+                <div class="card-icon icon-1">
+                  <i class="ri-user-line"></i>
+                </div>
+
+                <h3 class="card-title">Responsabilité</h3>
+
+                <p class="card-text">
+                  Votre désir notre responsabilité
+                </p>
+
+
+              </div>
+            </li>
+
+            <li>
+              <div class="get-start-card">
+
+                <div class="card-icon icon-2">
+                  <i class="ri-secure-payment-line"></i>
+                </div>
+
+                <h3 class="card-title">Confidentialité</h3>
+
+                <p class="card-text">
+                  Avec AutoHeaven vos données, sont mieux sécurisé
+                </p>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="get-start-card">
+
+                <div class="card-icon icon-3">
+                  <i class="ri-progress-1-fill"></i>
+                </div>
+
+                <h3 class="card-title">Satisfaction</h3>
+
+                <p class="card-text">
+                  Votre satisfaction notre priorité, ce qui nous booste à encore être meilleure davantage!
+                </p>
+
+              </div>
+            </li>
+
+
+          </ul>
+
+        </div>
+      </section>
+
+
+
+
+
+      
+    </article>
+  </main>
+
+
+{% endblock %}

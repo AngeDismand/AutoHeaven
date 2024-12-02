@@ -1,0 +1,60 @@
+<ul class="featured-car-list" >
+{% for vehicule in vehicules%}
+<li>
+<div class="featured-car-card">
+  <figure class="card-banner">
+    {% if vehicule.image %}
+    <img src="../media/{{vehicule.image}}" alt="Image 1"  width="440" height="300"  loading="lazy"  class="w-100">
+    {% else %}
+    <img src="../media/vehicule_image/default_car_img.webp" alt="vehicule image"  width="440" height="300"  loading="lazy"  class="w-100">
+    {% endif %}
+  </figure>
+  <div class="card-content">
+
+    <ul class="card-list">
+      <li class="card-list-item">
+        <ion-icon name="keypad-outline" style="color:#000"></ion-icon>
+        <span class="card-item-text">Marque</span>
+      </li>
+
+      <li class="card-list-item">
+        <ion-icon name="car-sport-outline" style="color:#0627e0"></ion-icon>      
+          <span class="card-item-text">{{vehicule.marque }}</span>
+      </li>
+      <li class="card-list-item">
+        <ion-icon name="settings-outline"  style="color:#000"></ion-icon>
+        <span class="card-item-text">Model</span>
+      </li>
+
+      <li class="card-list-item">
+        <ion-icon name="flame-outline" style="color:#06e07a"></ion-icon>     
+          <span class="card-item-text">{{vehicule.model }}</span>
+      </li>
+      <li class="card-list-item">
+        <ion-icon name="radio-outline"  style="color:#000"></ion-icon>  
+          <span class="card-item-text">Statut</span>
+      </li>
+      <li class="card-list-item">
+        {% if vehicule.statut == 'Disponible'%}
+        <ion-icon name="shield-checkmark-outline" style="color:green"></ion-icon>
+        {% else %}
+        <ion-icon name="close-circle-outline" style="color:red"></ion-icon>
+        {% endif %}
+          <span class="card-item-text">{{vehicule.statut}}</span>
+      </li>
+
+    </ul>
+    <div class="overlay" align="center">
+      <button class="myBtn btn btn-primary btn-sm"  hx-get="{% url 'edit_vehicule' pk=vehicule.pk %}" hx-target="#dialog">Modifier</button>
+      
+    </div>
+    <div class="overlay" align="center">
+      <button class="myBtn btn btn-danger  btn-sm"  hx-get="{% url 'delete_vehicule' pk=vehicule.pk %}" hx-target="#dialog">Supprimer</button>
+     </div>
+   
+
+  </div>
+</div>
+</li>
+{% endfor %}
+</ul>

@@ -1,0 +1,59 @@
+{% include 'header.html' %}
+
+{% block title %}Se connecter{% endblock %}
+
+
+<div class="login show-login" id="login">
+  <form role="form" method="post"action="" class="register__form">
+     {% csrf_token %}
+     <h2 class="login__title">Inscription</h2>
+     <div align="center">
+         <h6 class="card-category">
+             {% if msg %}
+               <span class="text-danger" >{{ msg | safe }}</span>
+            
+             {% endif %}  
+         </h6>
+     </div> 
+     <div class="row pt-4 m-4">
+      <div class="col-12">
+        <label class="login__label">Nom d'utilisateur</label>
+       {{form.username}}
+        
+      </div>
+      <div class="col-12">
+        <label class="login__label">Email</label>
+       {{form.email}}
+        
+      </div>
+      <div class="col-12 ">
+        <label  class="login__label">Nom</label>
+        {{form.nom}}
+      </div>
+      <div class="col-12">
+        <label  class="login__label">Prénom</label>
+       {{form.prenom}}
+        
+      </div>
+      <div class="col-12">
+        <label  class="login__label">Sexe</label>
+       {{form.sexe}}
+        
+      </div>
+      <div class="col-12">
+        <label  class="login__label">Mot de passe</label>
+       {{form.password}}
+        
+      </div>
+    
+     </div>
+     <div>
+          
+      <button type="submit" class="login__button" name="login">S'inscrire</button>
+   </div>
+     <div>
+       <p >Un compte déjà?</p><a href=" {% url "login" %}"><font style="color:#0958e8;cursor:pointer">Connectez-vous ici!</font></a>
+     </div>
+  </form>
+</div>
+{% include 'footer.html' %}

@@ -1,0 +1,31 @@
+{% for location in locations%}
+<tr>
+  <td>
+    {{location.vehicule.immatriculation}}  {{location.vehicule.marque}} {{location.vehicule.model}}
+  </td>
+  <td>
+    {% if location.client.username == request.user.username %}
+    Vous
+    {% else%}
+    {{location.client.prenom}} {{location.client.nom}}
+    {% endif%}
+  </td>
+  <td>
+    {{location.date_debut}}
+  </td>
+  <td>
+    {{location.date_fin}}
+  </td>
+  <td>
+    {{location.montant_total}} £
+  </td>
+  <td>
+    {{location.statut}}
+  </td>
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_location' pk=location.pk %}" hx-target="#dialog">Edit</button>
+    <button class="btn btn-danger  btn-sm" hx-get="{% url 'delete_location' pk=location.pk %}" hx-target="#dialog">Supprimer</button>
+    
+  </td>
+</tr>
+{% endfor %}

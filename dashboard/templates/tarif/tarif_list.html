@@ -1,0 +1,19 @@
+{% for tarif in tarifs%}
+<tr>
+  <td>
+    {{tarif.category_vehicule.libelle}}
+  </td>
+  <td>
+    {{tarif.prix}} £
+  </td>
+  <td>
+    {{tarif.periodicite}}
+  </td>
+
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_tarif' pk=tarif.pk %}" hx-target="#dialog">Edit</button>
+    <button class="btn btn-danger  btn-sm" hx-get="{% url 'delete_tarif' pk=tarif.pk %}" hx-target="#dialog">Supprimer</button>
+    
+  </td>
+</tr>
+{% endfor %}

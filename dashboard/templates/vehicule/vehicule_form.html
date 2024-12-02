@@ -1,0 +1,128 @@
+<style>
+  .custom-file-input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .custom-file-input input[type="file"] {
+      position: absolute;
+      font-size: 100px;
+      right: 0;
+      top: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    
+    #fileInputLabel {
+      display: inline-block;
+      background: #3a2a6b;
+      color: #fff;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    
+    #imagePreview {
+      margin-top: 20px;
+      width: 200px;
+      height: 200px;
+      border: 4px solid #3a2a6b;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+    }
+    
+    #previewFrame {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 2px solid #fff;
+    }
+    
+    #imagePreview:hover {
+      border-color: #5e4ab9;
+    }
+    
+    #imagePreview::before {
+      content: "+";
+      font-size: 60px;
+      color: #5e4ab9;
+      line-height: 200px;
+      text-align: center;
+      display: block;
+    }
+    
+</style>
+<form hx-post="{{ request.path }}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' hx-encoding="multipart/form-data"  class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Véhicule</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row pt-4">
+      <div align="center">
+        <h6 class="card-category">
+            {% if msg %}
+              <span class="text-danger">{{ msg | safe }}</span>
+           
+            {% endif %}  
+        </h6>
+    </div> 
+    <div class="col-md-12">
+      <label for="" class="">Propriétaire du véhicule</label>
+           {{ form.proprio_vehicule }}
+    </div>
+      <div class="col-md-12">
+        <label for="" class="">Catégorie véhicule</label>
+             {{ form.category_vehicule }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Immatriculation</label>
+             {{ form.immatriculation }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Marque</label>
+             {{ form.marque }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Modèle</label>
+             {{ form.model }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Statut</label>
+             {{ form.statut }}
+      </div>
+
+      <div class="col-md-12">
+        {{form.image}}
+      
+    </div>
+  <div class="modal-footer">
+   
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      Annuler
+    </button>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </div>
+</form>
+
+<script>
+  function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var output = document.getElementById('imagePreview');
+        output.style.backgroundImage = 'url(' + reader.result + ')';
+        output.style.border = 'none';
+        output.style.color = 'transparent';
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    
+    
+</script>

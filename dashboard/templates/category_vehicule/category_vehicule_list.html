@@ -1,0 +1,15 @@
+{% for categorie in categories%}
+<tr>
+  <td>
+    {{categorie.libelle}}
+  </td>
+  <td>
+    {{categorie.description}}
+  </td>
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_category_vehicule' pk=categorie.pk %}" hx-target="#dialog">Edit</button>
+    <button class="btn btn-danger  btn-sm" hx-get="{% url 'delete_category_vehicule' pk=categorie.pk %}" hx-target="#dialog">Supprimer</button>
+    
+  </td>
+</tr>
+{% endfor %}

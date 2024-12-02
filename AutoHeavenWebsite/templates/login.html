@@ -1,0 +1,39 @@
+{% include 'header.html' %}
+
+{% block title %}Se connecter{% endblock %}
+<div class="login show-login" id="login">
+    <form role="form" method="post"action="" class="login__form">
+       {% csrf_token %}
+       <h2 class="login__title">Connectez-vous!</h2>
+       <div align="center">
+           <h6 class="card-category">
+               {% if msg and status  %}
+               <span class=" alert alert-success" >{{ msg | safe }}</span>
+               {% elif msg  %}
+                 <span class="alert alert-danger" style="color:#fff !important;background:#b91414e1">{{ msg | safe }}</span>
+              
+               {% endif %}  
+           </h6>
+       </div> 
+       <div class="login__group">
+          <div>
+             <label for="email" class="login__label">Nom d'utilisateur</label>
+             {{ form.username }}
+          </div>
+          
+          <div>
+             <label for="password" class="login__label">Mot de passe</label>
+             {{ form.password }}
+          </div>
+       </div>
+
+       <div>
+          
+          <button type="submit" class="login__button" name="login">Se connecter</button>
+       </div>
+       <div>
+         <p style="color:red">Vous n'avez pas de compte?</p><a href=" {% url "register" %}"><font style="color:#0958e8;cursor:pointer">Inscivez-vous ici!</font></a>
+       </div>
+    </form>
+ </div>
+ {% include 'footer.html' %}

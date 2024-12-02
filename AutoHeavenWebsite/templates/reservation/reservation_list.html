@@ -1,0 +1,80 @@
+{% if reservations|length > 0 %}
+<ul class="featured-car-list">
+{% for reservation in reservations%}
+<li>
+  <div class="featured-car-card">
+
+    <figure class="card-banner">
+      {% if reservation.vehicule.image %}
+      <img src=" {{ MEDIA_URL }}../media/{{reservation.vehicule.image }} " alt="Image" loading="lazy" width="440" height="300"
+      class="w-100">
+      {% else %}
+      <img src=" {{ MEDIA_URL }}../media/vehicule_image/default_car_img.webp " alt="Image" loading="lazy" width="440" height="300"
+      class="w-100">
+      {% endif %}
+       
+    </figure>
+
+    <div class="card-content">
+
+      <div class="card-title-wrapper">
+        <h3 class="h3 card-title">
+          <a href="#">{{reservation.vehicule.marque}}</a>
+        </h3>
+
+        <data class="year" value="">{{reservation.vehicule.model}}</data>
+      </div>
+
+      <ul class="card-list">
+
+        <li class="card-list-item">
+          <i class="ri-signal-tower-fill"></i>
+
+          <span class="card-item-text">Statut</span>
+        </li>
+
+        <li class="card-list-item">
+          
+          {% if reservation.reservation.statut == 'Payé' %}
+          <i class="ri-verified-badge-line"  style="color:green;font-size:25px"></i>
+          {% elif reservation.reservation.statut == 'En attente' %}
+          <i class="ri-close-line" style="color:red;font-size:25px"></i>
+          {% endif %}
+          {% if reservation.statut == 'Payé' %}
+          <span class="card-item-text">Réservation validé</span>
+          {% else %}
+          <span class="card-item-text">{{reservation.reservation.statut}}</span>
+          {% endif %}
+        </li>
+        <li class="card-list-item">
+          <i class="ri-calendar-line"></i>
+
+          <span class="card-item-text">Périodicité</span>
+        </li>
+        <li class="card-list-item">
+          <i class="ri-calendar-check-line"></i>
+          {% if reservation.tarif.periodicite == 'Hebdomadaire' %}
+          <span class="card-item-text">Semaine</span>
+          {% else%}
+          <span class="card-item-text">{{reservation.tarif.periodicite}}</span>
+          {% endif %}
+        </li>
+      </ul>
+      <div class="card-price-wrapper">
+        <p class="card-price">
+          <strong>Montant totale</strong>
+        </p>
+        <p class="card-price">
+          <strong>{{ reservation.reservation.montant_total }} £</strong> 
+        </p>
+      </div>
+    </div>
+  </div>
+</li>
+{% endfor %}
+</ul>
+{% else %}
+  <p align="center" style="font-size:20px;width:100%">Vous n'avez aucune réservation 😥.
+    Merci de choisir AutoHeaven! 
+  </p>
+{% endif %}

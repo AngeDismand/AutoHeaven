@@ -1,0 +1,54 @@
+
+<form hx-post="{{ request.path }}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' autocomplete="off" class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Ajout d'un Propiétaire de véhicule</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row pt-4">
+      <div align="center">
+        <h6 class="card-category">
+            {% if msg %}
+              <span class="text-danger">{{ msg | safe }}</span>
+           
+            {% endif %}  
+        </h6>
+    </div> 
+      <div class="col-md-6">
+        <label for="email" class="">Nom d'utilisateur</label>
+             {{ form.username }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Nom</label>
+             {{ form.nom }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Prénom</label>
+             {{ form.prenom }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Sexe</label>
+             {{ form.sexe }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Numéro de téléphone</label>
+             {{ form.numero_de_telephone }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Addresse</label>
+             {{ form.addresse }}
+      </div>
+      <div class="col-md-6">
+        <label for="" class="">Mot de passe</label>
+             {{ form.password }}
+      </div>
+    </div>
+  <div class="modal-footer">
+   
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      Annuler
+    </button>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </div>
+</form>
+

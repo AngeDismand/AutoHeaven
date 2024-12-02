@@ -1,0 +1,29 @@
+{% for client in clients%}
+{% if client.role == 'Proprio'%}
+<tr>
+  <td>
+    {{client.username}}
+  </td>
+  <td>
+    {{client.nom}}
+  </td>
+  <td>
+    {{client.prenom}}
+  </td>
+ 
+  <td>
+    {{client.numero_de_telephone}}
+  </td>
+  <td>
+    {{client.addresse}}
+  </td>
+  <td>
+    {{client.sexe}}
+  </td>
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_client' pk=client.pk %}" hx-target="#dialog">Edit</button>
+    <button class="btn btn-danger  btn-sm" hx-get="{% url 'delete_client' pk=client.pk %}" hx-target="#dialog">Supprimer</button>
+  </td>
+</tr>
+{% endif %}
+{% endfor %}

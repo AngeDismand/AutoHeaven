@@ -1,0 +1,59 @@
+{% if vehicule_infos|length > 0 %}
+<ul class="featured-car-list" >                    
+{% for vehicule_info in vehicule_infos%}
+                      {% if vehicule_info.vehicule.statut == 'Disponible' %}
+                        {% if vehicule_info.tarifs|length > 0 %}
+                          {% for one_tarif in vehicule_info.tarifs%}
+                    <li>
+                      <div class="featured-car-card">        
+                        <figure class="card-banner">
+                          {% if vehicule_info.vehicule.image %}
+                          <img src=" {{ MEDIA_URL }}../media/{{vehicule_info.vehicule.image }} " alt="Image" loading="lazy" width="440" height="300"
+                          class="w-100">
+                          {% else %}
+                          <img src=" {{ MEDIA_URL }}../media/vehicule_image/default_car_img.webp " alt="Image" loading="lazy" width="440" height="300"
+                          class="w-100">
+                          {% endif %}                           
+                        </figure>        
+                        <div class="card-content">       
+                          <div class="card-title-wrapper">
+                            <h3 class="h3 card-title">
+                              <a href="#">{{vehicule_info.vehicule.marque}}</a>
+                            </h3>       
+                            <data class="year" value="">{{vehicule_info.vehicule.model}}</data>
+                          </div>        
+                          <ul class="card-list">        
+                            <li class="card-list-item">
+                              <i class="ri-signal-tower-fill"></i>
+                              <span class="card-item-text">Statut</span>
+                            </li>        
+                            <li class="card-list-item">
+                              <i class="ri-verified-badge-line"></i>
+                              <span class="card-item-text">{{ vehicule_info.vehicule.statut }}</span>
+                            </li>
+                          </ul>
+                          <div class="card-price-wrapper">
+                            <p class="card-price">
+                              <strong>{{ one_tarif.prix }} £</strong> / 
+                              {% if one_tarif.periodicite == 'Hebdomadaire' %}
+                              Semaine
+                              {% else%}
+                              {{ one_tarif.periodicite }}
+                              {% endif %}
+                            </p>
+                            <button hx-get="{% url 'add_reservation' pk=vehicule_info.vehicule.pk tarif_id=one_tarif.id %}"  hx-target="#dialog" class="btn-reservation" >Réserver maintenant</button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                      {% endfor%}
+                    {% endif %}
+                    {% endif %}
+        {% endfor%}
+      </ul>
+      {% else %}
+      <p align="center" style="font-size:20px;width:100%">Aucune voiture n'est disponible pour l'instant! Patientez d'ici quelques minutes et vous aurez votre voiture de rêve!
+        Merci de choisir AutoHeaven! Votre agence de location de voiture de préférence
+      </p>
+      {% endif %}
+    

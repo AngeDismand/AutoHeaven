@@ -1,0 +1,4 @@
+<option value="">Sélectionner le tarif du véhicule</option>
+{% for one_tarif in tarifs%}
+<option value="{{one_tarif.id}}">{{one_tarif}}</option>
+{% endfor %}

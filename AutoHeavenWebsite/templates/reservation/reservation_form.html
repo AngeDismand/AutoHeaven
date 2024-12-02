@@ -1,0 +1,37 @@
+
+<form hx-post="{{ request.path }}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" align="center">Faites votre réservation en un clin d'oeil</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pt-4">
+      <div align="center">
+        <h6 class="card-category" align="center">
+            {% if msg %}
+              <span class="text-danger" >{{ msg | safe }}</span>
+           
+            {% endif %}  
+        </h6>
+    </div> 
+      <div class="col-md-12">
+        <label for="" class="">Date de début</label>
+             {{ form.date_debut }}
+      </div>
+      <div class="col-md-12">
+        <label for="" class="">Date de fin</label>
+             {{ form.date_fin }}
+      </div>
+      
+    </div>
+  <div class="modal-footer">
+   
+    <button type="button" class="btn btn-danger" data-dismiss="modal">
+      Annuler
+    </button>
+    <button type="submit" class="btn btn-primary">Valider</button>
+  </div>
+</form>
+
